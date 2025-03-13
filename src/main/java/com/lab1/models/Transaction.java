@@ -1,4 +1,4 @@
-package ATM;
+package com.lab1.models;
 import java.time.LocalDateTime;
 
 
@@ -27,10 +27,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "type='" + type + '\'' +
-                ", amount=" + amount +
-                ", timestamp=" + timestamp +
-                '}';
+        return String.format("Transaction{type='%s', amount=%.2f, timestamp=%s}", type, amount, timestamp);
     }
 }

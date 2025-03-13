@@ -1,12 +1,13 @@
-package ATM;
-import exceptions.InsufficientFundsException;
-import exceptions.InvalidTransactionException;
+package com.lab1.services;
+
+import com.lab1.exceptions.InvalidTransactionException;
+import com.lab1.models.Account;
+
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class ATM {
-    private Map<String, Account> accounts = new HashMap<>();
+public class AtmService implements IAtmService {
+    private final Map<String, Account> accounts = new HashMap<>();
     private Account currentAccount = null;
 
     public Account createAccount(String login, String pinCode) {
@@ -36,7 +37,7 @@ public class ATM {
         }
     }
 
-    public void withdraw(String login, double amount) throws InvalidTransactionException, InsufficientFundsException {
+    public void withdraw(String login, double amount) throws InvalidTransactionException {
         Account account = getAccount(login);
         if (account != null) {
             account.withdraw(amount);
@@ -46,9 +47,7 @@ public class ATM {
     public void printTransactionHistory(String login) {
         Account account = getAccount(login);
         if (account != null) {
-            account.getTransactionHistory().forEach(transaction ->
-                    System.out.println(transaction)
-            );
+            account.getTransactionHistory().forEach(System.out::println);
         }
     }
 

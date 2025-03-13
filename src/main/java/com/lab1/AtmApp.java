@@ -1,11 +1,16 @@
-package ATM;
-import exceptions.InsufficientFundsException;
-import exceptions.InvalidTransactionException;
+package com.lab1;
+
+import com.lab1.exceptions.InsufficientFundsException;
+import com.lab1.exceptions.InvalidTransactionException;
+import com.lab1.models.Account;
+import com.lab1.services.AtmService;
+import com.lab1.services.IAtmService;
+
 import java.util.Scanner;
 
 
-public class ATMApp {
-    private static ATM atm = new ATM();
+public class AtmApp {
+    private static final IAtmService atm = new AtmService();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Account account = null;
@@ -28,6 +33,8 @@ public class ATMApp {
                     System.out.print("Введите пин-код для нового счета: ");
                     String pinCode = scanner.next();
                     account = atm.createAccount(login, pinCode);
+                    enteredLogin = login;
+                    enteredPinCode = enteredPinCode;
                     System.out.println("Новый счет создан! Логин: " + login + ". Баланс: 0.0");
                     break;
                 case 2:
@@ -95,6 +102,8 @@ public class ATMApp {
                         case 5:
                             System.out.println("Выход из счета.");
                             account = null;
+                            enteredLogin = null;
+                            enteredPinCode = null;
                             break;
                         default:
                             System.out.println("Некорректный выбор. Попробуйте снова.");

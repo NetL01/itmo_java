@@ -1,11 +1,13 @@
-package ATM;
-import exceptions.InsufficientFundsException;
-import exceptions.InvalidTransactionException;
+package com.lab1.models;
+
+import com.lab1.exceptions.InsufficientFundsException;
+import com.lab1.exceptions.InvalidTransactionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Account implements IAccount {
+public class Account {
     private final String login;
     private final String pinCode;
     private double balance;
@@ -18,17 +20,14 @@ public class Account implements IAccount {
         this.transactions = new ArrayList<>();
     }
 
-    @Override
     public int getAccountId() {
         return 0;
     }
 
-    @Override
     public double getBalance() {
         return balance;
     }
 
-    @Override
     public void deposit(double amount) throws InvalidTransactionException {
         if (amount <= 0) {
             throw new InvalidTransactionException("Сумма пополнения должна быть положительной.");
@@ -37,7 +36,6 @@ public class Account implements IAccount {
         transactions.add(new Transaction("Пополнение", amount));
     }
 
-    @Override
     public void withdraw(double amount) throws InsufficientFundsException, InvalidTransactionException {
         if (amount <= 0) {
             throw new InvalidTransactionException("Сумма для снятия должна быть положительной.");
@@ -49,9 +47,8 @@ public class Account implements IAccount {
         transactions.add(new Transaction("Снятие", -amount));
     }
 
-    @Override
     public List<Transaction> getTransactionHistory() {
-        return new ArrayList<>(transactions);
+        return transactions;
     }
 
     public boolean authenticate(String login, String pinCode) {
