@@ -20,8 +20,8 @@ public class Account {
         this.transactions = new ArrayList<>();
     }
 
-    public int getAccountId() {
-        return 0;
+    public String getLogin() {
+        return login;
     }
 
     public double getBalance() {
